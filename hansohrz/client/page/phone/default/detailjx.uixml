@@ -1,0 +1,177 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html orientation="port" id="new">
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false">Hello World</title>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<link rel="stylesheet" type="text/css" href="res:css/control.css" />
+		<script src="res:script/base.js"/>
+		<script src="res:script/app.js"/>
+		<script src="res:script/config.js"/>
+		<script src="res:script/hsoa.js"/>
+		<style type="text/css">
+		.label-right
+			{
+				width:65%;
+				margin:4;
+				color:#808080;
+				border-size:0;
+			}
+			.label-left{
+				width:35%;
+				margin:8 0 8 4;
+				
+			}
+		</style>
+		<script>
+		<![CDATA[
+		    //var page=1;
+			//var rowSize = 10; 
+			//var sumpage=0;
+			//var freshTag = 1;//搜索时freshTag=1，列表注入需clear()
+			//var tableString="";
+			//var eid="";
+			//var type=window.getParameter("type");
+			//var ListID="";
+		    var delID =window.getParameter("delID");
+		
+		function init(){
+			var url = "http://hsoa/detailjx.jsp";
+				var method = "post";
+			    var data = "ID="+delID;
+			    
+			    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+				var isShowProgress = true;
+			    var ajax = new Ajax(url,method,data,successeditFunction,null,requestHeader,isShowProgress);						
+			   	ajax.send();
+		}
+		
+		function successeditFunction(data)
+		{
+				var rspData = data.responseText.toJSON();
+				
+				$("list").clear().provide(rspData.list[0]).show();
+				
+							 
+		}
+		
+		function formcallback(response){	                    	
+           alert("请求服务器失败，请检查网络");
+        }
+        
+        
+        function Dell(){
+	     
+				var url = "http://hsoa/deljx.jsp";
+				var method = "post";
+			    var data = "ID="+delID;
+			    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+				var isShowProgress = true;
+			    var ajax = new Ajax(url,method,data,successdelFunction,null,requestHeader,isShowProgress);						
+			   	ajax.send();
+		}
+		
+		function successdelFunction(data)
+			{
+				alert("删除成功！！",winClose);
+
+			}
+		 
+		 function winClose(){
+	      
+		  window.open("res:page/listjx.uixml"); 
+		}
+		
+		function Edit(){
+	      
+	     	window.open("res:page/editjx.uixml",true,false,"","delID="+delID);
+	
+		}
+		
+		
+		
+		
+		]]>
+		</script>
+	</head>
+	<header>
+		<titlebar title="详情" iconhref="script:close" hidericon="false" id="titlebarid"  />
+	</header>
+	<body onload="init()">
+				<div id="list" style="display:none;background-color: white">
+				
+				<div class="container">
+					
+					<div class="label-left">工号(非报销编号)</div>
+					<div class="label-right" style="text-align:right">${bxbh}</div>
+					<hr/>
+					<div class="label-left">代表姓名</div>
+					<div class="label-right" style="text-align:right">${dbxm}</div>
+					<hr/>
+					<div class="label-left">面谈负责人</div>
+					<div class="label-right" style="text-align:right">${mtfzr}</div>
+					<hr/>
+					<div class="label-left">产品一</div>
+					<div class="label-right" style="text-align:right">${cp1}</div>
+					<hr/>
+					<div class="label-left">产品二</div>
+					<div class="label-right" style="text-align:right">${cp2}</div>	
+					<hr/>
+					<div class="label-left">产品三</div>
+					<div class="label-right" style="text-align:right">${cp3}</div>
+					<hr/>
+					<div class="label-left">上月纯销(万)</div>
+					<div class="label-right" style="text-align:right">${sycx}</div>
+					<hr/>
+					<div class="label-left">上月任务(万)</div>
+					<div class="label-right" style="text-align:right">${syrw}</div>
+					<hr/>
+					<div class="label-left">本月任务(万)</div>
+					<div class="label-right" style="text-align:right">${byrw}</div>
+					<hr/>
+					<div class="label-left">面谈年月日</div>
+					<div class="label-right" style="text-align:right">${date}</div>
+					<hr/>
+					<div class="label-left">所负责市场新开发、减少的终端数分析</div>
+					<div class="label-right" style="text-align:right">${sfz}</div>
+					<hr/>
+					<div class="label-left">面谈记录(一)讨论影响当月任务达成关键点</div>
+					<div class="label-right" style="text-align:right">${mt1}</div>
+					<hr/>
+					<div class="label-left">面谈记录(二)提出建议</div>
+					<div class="label-right" style="text-align:right">${mt2}</div>
+					<hr/>
+					<div class="label-left">面谈者自评</div>
+					<div class="label-right" style="text-align:right">${mtzp}</div>
+					<hr/>
+					<div class="label-left">填表人姓名</div>
+					<div class="label-right" style="text-align:right">${tbxm}</div>
+					<hr/>
+					<div class="label-left">三仿</div>
+					<div class="label-right" style="text-align:right">${sf}</div>
+					<hr/>
+					<div class="label-left">执行力</div>
+					<div class="label-right" style="text-align:right">${zxl}</div>
+					<hr/>
+					<div class="label-left">团队协作</div>
+					<div class="label-right" style="text-align:right">${tdxz}</div>
+					<hr/>
+					<div class="label-left">综合评价</div>
+					<div class="label-right" style="text-align:right">${zhpj}</div>
+					
+				</div>
+			 </div>
+			<!--<div id="param">
+				<input type="hidden" value="${value}" id="${name}" name="${name}"></input>
+			</div>-->
+	</body>
+	<footer >
+	 	<div style="width:100%;padding:0 0 6 0;background-color: white;text-align: center;border-top-size:1;border-color:#d8d8d8;" id="footer">
+	    
+	    <div style="width:50%;text-align:center;color:#005784;font-size:17dp;" href="Dell()" ><img src="res:image/del.png"/><br size='2'/>删除</div>
+	    <div style="width:50%;text-align:center;color:#005784;font-size:17dp;" href="Edit()" ><img src="res:image/forword.png"/><br size='2'/>编辑</div>
+	     
+	    </div> 
+	 
+	 </footer>
+</html>

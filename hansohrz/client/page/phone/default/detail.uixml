@@ -1,0 +1,77 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html>
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false">Hello World</title>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<link rel="stylesheet" type="text/css" href="res:css/control.css" />
+		<script src="res:script/exmobijs/base.js"/>
+		<script src="res:script/exmobijs/utility.js"/>
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/db.js"/>
+		<script src="res:script/exmobijs/validate.js"/>
+		<script src="res:script/exmobijs/xpath.js"/>
+        <script src="res:script/exmobijs/common.js"/>
+		<script>
+		<![CDATA[
+			function init(){
+				var id=window.getParameter("id");
+				var type=window.getParameter("type");
+				var url = "http://hsoa/detail.jsp";
+				var method = "post";
+			    var data ="id="+id;
+			    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+				var isShowProgress = true;
+			    var ajax = new Ajax(url,method,data,successFunction,null,requestHeader,isShowProgress);						
+			   	ajax.send();
+			}
+			function wclose(){
+			window.close();
+			}
+			function successFunction(data){
+			   var rspData = data.responseText.toJSON();
+			   $("showParam").clear().provide(rspData.showParam[0]).show();
+			   $("param").clear().provide(rspData.param).show();
+			}
+		]]>
+		</script>
+	</head>
+	<header>
+		<titlebar id="titlebarid" caption="" title="人员详情" iconhref="script:close" iconkeybind="back" ricon="res:image/icon/fresh.png" clickricon="res:image/icon/fresh_c.png"  riconhref="refresh()" hidericon="true"></titlebar>
+	</header>
+	<body onload="init()">
+		<div  style="display: none" id="showParam">
+		<div class="container" >
+					<font class="label-left" >序号</font>
+					<div class="label-right" style="text-align:right">${num}</div>
+					<hr/>
+					<font class="label-left" >姓名</font>
+					<div class="label-right" style="text-align:right">${name}</div>
+					<hr/>
+					<font class="label-left" >公司</font>
+					<div class="label-right" style="text-align:right">${gs}</div>
+					<hr/>
+					<font class="label-left" >学校</font>
+					<div class="label-right" style="text-align:right">${school}</div>
+					<hr/>
+					<font class="label-left" >专业</font>
+					<div class="label-right" style="text-align:right">${zy}</div>
+					<hr/>
+					<font class="label-left" >岗位</font>
+					<div class="label-right" style="text-align:right">${gw}</div>
+					<hr/>
+					<font class="label-left" >登记类别</font>
+					<div class="label-right" style="text-align:right">${djlb}</div>
+					<hr/>
+					<font class="label-left" >详细说明</font>
+					<div class="label-right" style="text-align:right">${xxsm}</div>
+					<hr/>
+					<font class="label-left" >登记人</font>
+					<div class="label-right" style="text-align:right">${djr}</div>
+					<hr/>
+					<font class="label-left" >登记日期</font>
+					<div class="label-right" style="text-align:right">${date}</div>
+				</div>
+			</div>
+	</body>
+</html>

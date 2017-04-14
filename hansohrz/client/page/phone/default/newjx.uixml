@@ -1,0 +1,354 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html orientation="port" id="new">
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false">Hello World</title>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<link rel="stylesheet" type="text/css" href="res:css/control.css" />
+		<script src="res:script/base.js"/>
+		<script src="res:script/app.js"/>
+		<script src="res:script/config.js"/>
+		<script src="res:script/hsoa.js"/>
+		<style type="text/css">
+		.label-right
+			{
+				width:65%;
+				margin:4;
+				color:#808080;
+				border-size:0;
+			}
+			.label-left{
+				width:35%;
+				margin:8 0 8 4;
+				
+			}
+		</style>
+		<script>
+		<![CDATA[
+		//var mainId="";
+		//var subId="";
+		//var secId="";
+		//var userid="";
+		//var logintype="";
+		//var workflowid="";
+		function submitt(){
+			
+			var dbxm=$("employeeInfoVO.value(C_DAIBIAO_NAME)").value;
+			var tbxm=$("employeeInfoVO.value(C_JXTBR)").value;
+			var bxbh=$("employeeInfoVO.value(C_EMPLOYEE_CODE)").value;
+			var mtfzr=$("employeeInfoVO.value(C_JIXIAOFUZEREN)").value;
+			var cp=$("employeeInfoVO.value(C_PRODUCT_NAME)").value;
+			var cp2=$("employeeInfoVO.value(C_PRODUCT_NAME2)").value;
+			var cp3=$("employeeInfoVO.value(C_PRODUCT_NAME3)").value;
+			var sycx=$("employeeInfoVO.value(C_LASTMONSALE)").value;
+			var syrw=$("employeeInfoVO.value(C_LASTMONTASK)").value;
+			var byrw=$("employeeInfoVO.value(C_THISMONTASK)").value;
+			var date=$("employeeInfoVO.value(C_JIXIAOMIANTAN_YMD)").value;
+			var sfz=$("employeeInfoVO.value(C_MARKET_ANALYSE)").value;
+			var mt1=$("employeeInfoVO.value(C_JIXIAOMIANTAN_NOTES1)").value;
+			var mt2=$("employeeInfoVO.value(C_C_JIXIAOMIANTAN_NOTES2)").value;
+			var mtzp=$("employeeInfoVO.value(C_MIANTAN_ZIPIN)").value;
+			var sf=$("employeeInfoVO.value(C_JXMT_SANFANG)").value;
+			var zxl=$("employeeInfoVO.value(C_JXMT_ZXL)").value;
+			var tdxz=$("employeeInfoVO.value(C_JXMT_TDXZ)").value;
+			var zhpj=$("employeeInfoVO.value(C_JXMT_ZHPJ)").value;
+			
+			
+			var url = "http://hsoa/newjx.jsp";
+			var method = "post";
+		    var data ="dbxm="+dbxm+"&tbxm="+tbxm+"&bxbh="+bxbh+"&mtfzr="+mtfzr+"&cp="+cp+"&cp2="+cp2+"&cp3="+cp3+"&sycx="+sycx+"&syrw="+syrw+"&byrw="+byrw+"&date="+date+"&sfz="+sfz+"&mt1="+mt1+"&mt2="+mt2+"&mtzp="+mtzp+"&sf="+sf+"&zxl="+zxl+"&tdxz="+tdxz+"&zhpj="+zhpj;
+		    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+			var isShowProgress = true;
+		    var ajax = new Ajax(url,method,data,successFunction,formcallback,requestHeader,isShowProgress);						
+		   	ajax.send();
+		
+		}
+		function successFunction(data)
+		{
+				alert("新增成功!",winClose);
+
+		}
+		function formcallback(response){	                    	
+           alert("请求服务器失败，请检查网络");
+        }
+        
+        function winClose(){
+	      //var wn = Util.getWindowById("list");
+		  //wn.callFunction("refresh()");
+		  //window.close(); 
+		  window.open("res:page/listjx.uixml");
+		}   
+           
+            //function winClose(){
+			//var wn = Util.getWindowById("new");
+			///*wn.callFunction("refresh()");*/
+			//window.close(); 
+		//}
+        
+		function submit()
+		{
+			if($("employeeInfoVO.value(C_DAIBIAO_NAME)").value=="")
+			{
+				alert("代表姓名未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JXTBR)").value=="")
+			{
+				alert("填表人姓名未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_EMPLOYEE_CODE)").value=="")
+			{
+				alert("代表工号未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JIXIAOFUZEREN)").value=="")
+			{
+				alert("面谈负责人未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_PRODUCT_NAME)").value=="")
+			{
+				alert("产品未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_LASTMONSALE)").value=="")
+			{
+				alert("上月纯销未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_LASTMONTASK)").value=="")
+			{
+				alert("上月任务未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_THISMONTASK)").value=="")
+			{
+				alert("本月任务未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JIXIAOMIANTAN_YMD)").value=="")
+			{
+				alert("面谈年月日未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_MIANTAN_ZIPIN)").value=="")
+			{
+				alert("面谈者自评未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_MARKET_ANALYSE)").value=="")
+			{
+				alert("分析未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JIXIAOMIANTAN_NOTES1)").value=="")
+			{
+				alert("面谈记录一未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_C_JIXIAOMIANTAN_NOTES2)").value=="")
+			{
+				alert("面谈记录二未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JXMT_SANFANG)").value=="")
+			{
+				alert("三访未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JXMT_ZXL)").value=="")
+			{
+				alert("执行力未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JXMT_TDXZ)").value=="")
+			{
+				alert("团队协作未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JXMT_ZHPJ)").value=="")
+			{
+				alert("综合评价未填写！");
+				return;
+			}
+			
+	        /*//$("src").value="submit";
+	        var formsend=document.getElementById("formsend");
+	        formsend.method="post";
+	        //formsend.submit();
+	        $("formsend").submit();*/
+            submitt();
+		}
+    
+		function succ(data)
+		{
+			alert("新建成功!",window.close);
+		}
+		
+		
+		]]>
+		</script>
+	</head>
+	<header>
+		<titlebar title="添加记录" iconhref="script:close" hidericon="false" id="titlebarid" ricon="res:image/icon/btn_submit.png" clickricon="res:image/icon/btn_submit.png" riconhref="submit()"/>
+	</header>
+	<body onload=" ">
+		<form id="formsend" action="http://hsoa/newSubmitjx.jsp" method="post" success="succ" >
+				<div class="container" >
+				   
+				   
+				    <div class="label-left">工号(非报销编号)<font style="color:red;font-weight:bold">！</font></div>
+					<input id="C22554397" class="label-right" name="employeeInfoVO.value(C_EMPLOYEE_CODE)"   type="text" value="" prompt="请填写工号(非报销编号)" />
+					<hr/>
+					<div class="label-left">代表姓名<font style="color:red;font-weight:bold">！</font></div>
+					<input id="C22561224" class="label-right" name="employeeInfoVO.value(C_DAIBIAO_NAME)"   type="text" value="" prompt="请填写代表姓名" />
+					
+					<hr/>
+					<div class="label-left">面谈负责人<font style="color:red;font-weight:bold">！</font></div>
+					<input id="C22554399" class="label-right" name="employeeInfoVO.value(C_JIXIAOFUZEREN)"   type="text" value="" prompt="请填写面谈负责人" />
+					<hr/>
+					<div class="label-left">产品一<font style="color:red;font-weight:bold">！</font></div>
+					<select id="employeeInfoVO.value(C_PRODUCT_NAME)" name="employeeInfoVO.value(C_PRODUCT_NAME)" class="label-right" >
+						<option value="">请选择产品</option>
+						<option value="0">泽菲</option>
+						<option value="1">普莱乐</option>
+						<option value="2">恒捷</option>
+						<option value="3">欧兰宁</option>
+						<option value="4">瑞波特</option>
+						<option value="5">丰迪</option>
+						<option value="6">盖诺</option>
+						<option value="7">恒丹</option>
+						<option value="8">孚莱迪</option>
+						<option value="9">昕美</option>
+						<option value="10">昕维</option>
+						<option value="11">阿美宁</option>
+						<option value="12">泽坦</option>
+						<option value="13">瑞琪</option>
+						<option value="14">诗乐普</option>
+						<option value="15">迈灵达</option>
+					</select>
+					<hr/>
+					<div class="label-left">产品二</div>
+					<select id="employeeInfoVO.value(C_PRODUCT_NAME2)" name="employeeInfoVO.value(C_PRODUCT_NAME2)" class="label-right" >
+						<option value=""></option>
+						<option value="0">泽菲</option>
+						<option value="1">普莱乐</option>
+						<option value="2">恒捷</option>
+						<option value="3">欧兰宁</option>
+						<option value="4">瑞波特</option>
+						<option value="5">丰迪</option>
+						<option value="6">盖诺</option>
+						<option value="7">恒丹</option>
+						<option value="8">孚莱迪</option>
+						<option value="9">昕美</option>
+						<option value="10">昕维</option>
+						<option value="11">阿美宁</option>
+						<option value="12">泽坦</option>
+						<option value="13">瑞琪</option>
+						<option value="14">诗乐普</option>
+						<option value="15">迈灵达</option>
+					</select>
+					<hr/>
+					<div class="label-left">产品三</div>
+					<select id="employeeInfoVO.value(C_PRODUCT_NAME3)" name="employeeInfoVO.value(C_PRODUCT_NAME3)" class="label-right" >
+						<option value=""></option>
+						<option value="0">泽菲</option>
+						<option value="1">普莱乐</option>
+						<option value="2">恒捷</option>
+						<option value="3">欧兰宁</option>
+						<option value="4">瑞波特</option>
+						<option value="5">丰迪</option>
+						<option value="6">盖诺</option>
+						<option value="7">恒丹</option>
+						<option value="8">孚莱迪</option>
+						<option value="9">昕美</option>
+						<option value="10">昕维</option>
+						<option value="11">阿美宁</option>
+						<option value="12">泽坦</option>
+						<option value="13">瑞琪</option>
+						<option value="14">诗乐普</option>
+						<option value="15">迈灵达</option>
+					</select>
+					<hr/>
+					<div class="label-left">上月纯销(万)<font style="color:red;font-weight:bold">！</font></div>
+					<input id="employeeInfoVO.value(C_LASTMONSALE)" class="label-right" name="employeeInfoVO.value(C_LASTMONSALE)"   type="text" value="" prompt="请填写上月纯销" />
+					<hr/>
+					<div class="label-left">上月任务(万)<font style="color:red;font-weight:bold">！</font></div>
+					<input id="employeeInfoVO.value(C_LASTMONTASK)" class="label-right" name="employeeInfoVO.value(C_LASTMONTASK)"   type="text" value="" prompt="请填写上月任务" />
+					<hr/>
+					<div class="label-left">本月任务(万)<font style="color:red;font-weight:bold">！</font></div>
+					<input id="employeeInfoVO.value(C_THISMONTASK)" class="label-right" name="employeeInfoVO.value(C_THISMONTASK)"   type="text" value="" prompt="请填写本月任务" />
+					<hr/>
+					<div class="label-left">面谈年月日<font style="color:red;font-weight:bold">！</font></div>
+					<object id="employeeInfoVO.value(C_JIXIAOMIANTAN_YMD)" class="label-right" name="employeeInfoVO.value(C_JIXIAOMIANTAN_YMD)"   type="date" value="" prompt="请填写面谈年月日" />
+					<hr/>
+					<div class="label-left">面谈者自评<font style="color:red;font-weight:bold">！</font></div>
+					<select id="employeeInfoVO.value(C_MIANTAN_ZIPIN)" name="employeeInfoVO.value(C_MIANTAN_ZIPIN)" class="label-right">
+						<option value="">请选择自评</option>
+						<option value="0">A.满意:双方达成共识，制定详细的行动计划</option>
+						<option value="1">B.基本满意:只有少数事项需要进一步沟通确认</option>
+						<option value="2">C.不满意:未达成共识，需要进一步协商</option>
+					</select>
+					<hr/>
+					<div class="label-left">填表人姓名<font style="color:red;font-weight:bold">！</font></div>
+					<input id="C22561229" class="label-right" name="employeeInfoVO.value(C_JXTBR)"   type="text" value="" prompt="请填写填表人姓名" />
+					<hr/>
+					<div class="label-left">所负责市场新开发、减少的终端数分析<font style="color:red;font-weight:bold">！</font></div>
+					<textarea class="label-right" rows="4" style="" id="C22555194" name="employeeInfoVO.value(C_MARKET_ANALYSE)" ></textarea>
+					<hr/>
+					<div class="label-left">面谈记录(一)讨论影响当月任务达成关键点<font style="color:red;font-weight:bold">！</font></div>
+					<textarea class="label-right" rows="4" style="" id="C22555196" name="employeeInfoVO.value(C_JIXIAOMIANTAN_NOTES1)" ></textarea>
+					<hr/>
+					<div class="label-left">面谈记录(二)提出建议<font style="color:red;font-weight:bold">！</font></div>
+					<textarea class="label-right" rows="4" style="" id="C22555198" name="employeeInfoVO.value(C_C_JIXIAOMIANTAN_NOTES2)" ></textarea>
+					<hr/>
+					<div class="label-left">三访<font style="color:red;font-weight:bold">！</font></div>
+					<select id="employeeInfoVO.value(C_JXMT_SANFANG)" name="employeeInfoVO.value(C_JXMT_SANFANG)" class="label-right">
+						<option value="">请选择</option>
+						<option value="0">优秀</option>
+						<option value="1">良好</option>
+						<option value="2">合格</option>
+						<option value="3">不合格</option>
+					</select>
+					<hr/>
+					<div class="label-left">执行力<font style="color:red;font-weight:bold">！</font></div>
+					<select id="employeeInfoVO.value(C_JXMT_ZXL)" name="employeeInfoVO.value(C_JXMT_ZXL)" class="label-right">
+						<option value="">请选择</option>
+						<option value="0">优秀</option>
+						<option value="1">良好</option>
+						<option value="2">合格</option>
+						<option value="3">不合格</option>
+					</select>
+					<hr/>
+					<div class="label-left">团队协作<font style="color:red;font-weight:bold">！</font></div>
+					<select id="employeeInfoVO.value(C_JXMT_TDXZ)" name="employeeInfoVO.value(C_JXMT_TDXZ)" class="label-right">
+						<option value="">请选择</option>
+						<option value="0">优秀</option>
+						<option value="1">良好</option>
+						<option value="2">合格</option>
+						<option value="3">不合格</option>
+					</select>
+					<hr/>
+					<div class="label-left">综合评价<font style="color:red;font-weight:bold">！</font></div>
+					<select id="employeeInfoVO.value(C_JXMT_ZHPJ)" name="employeeInfoVO.value(C_JXMT_ZHPJ)" class="label-right">
+						<option value="">请选择</option>
+						<option value="0">A</option>
+						<option value="1">B</option>
+						<option value="2">C</option>
+						<option value="3">D</option>
+					</select>
+					
+				</div>
+			 
+			<!--<div id="param">
+				<input type="hidden" value="${value}" id="${name}" name="${name}"></input>
+			</div>-->
+		</form>
+	</body>
+	<!--<fixset>
+	  <fix style="bottom:18;right:28;display: none" id="fixid">
+	  	  	<img src="res:image/icon/addsub.png" href="addSub()" style="width:40;height:40"/>
+	  </fix>
+   </fixset>-->
+</html>

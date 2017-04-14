@@ -1,0 +1,36 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html>
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false">Hello World</title>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<link rel="stylesheet" type="text/css" href="res:css/control.css" />
+		<script src="res:script/exmobijs/base.js"/>
+		<script src="res:script/exmobijs/utility.js"/>
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/db.js"/>
+		<script src="res:script/exmobijs/validate.js"/>
+		<script src="res:script/exmobijs/xpath.js"/>
+        <script src="res:script/exmobijs/common.js"/>
+        <style type="text/css">
+        
+        </style>
+		<script>
+		<![CDATA[
+			function getlist(){
+				window.open("res:page/listjx.uixml");
+			}
+		]]>
+		</script>
+	</head>
+	<header>
+		<titlebar id="titlebarid" caption="" title="绩效考核" iconhref="script:close" iconkeybind="back" ricon="res:image/icon/fresh.png" clickricon="res:image/icon/fresh_c.png"  riconhref="refresh()" hidericon="true"></titlebar>
+	</header>
+	<body>
+		<grid id="grid1" style="colspacing:0;rowspacing:0;cell-width:65;tip-background-color:red;font-size:18;tip-height:15;tip-border-radius:10">
+			<cell text="新增" icon="res:image/main/q0.jpg" isshowtip="false" tiptext="" href="res:page/newjx.uixml"></cell>
+			<cell text="查询" icon="res:image/main/q1.jpg" isshowtip="false" tiptext="" href="res:page/listjx.uixml"></cell>		
+		</grid>
+		
+	</body>
+</html>

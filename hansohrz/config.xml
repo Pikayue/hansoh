@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config scope="client" clientversion="4" devicetype="all" theme="skin-default"> 
+  <appid>hansohrz</appid>  
+  <appname>豪森人资</appname>  
+  <description></description>  
+  <version>1.1.1</version>  
+  <date>2017-03-08</date>  
+  <homepage src="res:page/login.xhtml"/>  
+  <faultconfig src=""/>  
+  <access network="true" gps="true" camera="true" certificate="true" land="true" orientation="port"/>  
+  <vendor email="" url=""/>  
+  <icon main="res:image/main.png" logo="res:image/u.png" selectedlogo="res:image/selectedlogo.png"/> 
+</config>

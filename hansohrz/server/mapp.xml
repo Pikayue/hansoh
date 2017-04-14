@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<maxml version="2.0" xmlns="http://www.nj.fiberhome.com.cn/map"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.nj.fiberhome.com.cn/map maxml-2.0.xsd">
+	<route baseaddr="http://hsoa.*">
+	
+	    <!-- 登录 -->
+	    <forward pattern="login/logincheck.jsp.*" path="loginCheck.jsp"/>
+	    <!-- 列表 -->
+	    <forward pattern="/list.jsp" path="list.jsp"/>
+	    <!-- del -->
+	    <forward pattern="/del.jsp" path="del.jsp"/>
+	    <!-- 新增 -->
+	    <forward pattern="/new.jsp" path="new.jsp"/>
+	    <!-- 编辑 -->
+	    <forward pattern="/edit.jsp" path="edit.jsp"/>
+        <!-- 列表 -->
+	    <forward pattern="/list01.jsp" path="list01.jsp"/>
+	    
+   	    <!-- jx登录 -->
+	    <forward pattern="login/logincheckjx.jsp.*" path="loginCheckjx.jsp"/>
+	    <!-- jx列表 -->
+	    <forward pattern="/listjx.jsp" path="listjx.jsp"/>
+	    <!-- jxdel -->
+	    <forward pattern="/deljx.jsp" path="deljx.jsp"/>
+	    <!-- jx新增 -->
+	    <forward pattern="/newjx.jsp" path="newjx.jsp"/>
+	    <!-- jx编辑 -->
+	    <forward pattern="/editjx.jsp" path="editjx.jsp"/>
+        <!-- jx列表 -->
+	    <forward pattern="/list01jx.jsp" path="list01jx.jsp"/>
+	    
+	     <!-- 列表 -->
+	    <forward pattern="/power.jsp" path="power.jsp"/>
+	    
+	       <!-- 工资 -->
+	    <forward pattern="/wages.jsp" path="wages.jsp"/>
+	    
+	    
+	</route>
+	
+  <config>
+  
+  	<httppushrsp restrainrsp="false"/>
+    <htmlformat wellformat="true" />
+    <filepreviewconfig wordtohtml="true"/>
+    <!-- 正式 -->
+    <domain address="hr.hansoh.cn:8080" name="hsoa"/>
+    
+  </config>
+  
+  
+  <services>
+  	<http-service>
+  		<!-- http://192.168.6.241:8001/process/notify/hsoa@fiberhome/push?title=aaa&userid=27181,16059 -->
+  		<!-- http://112.85.32.239:8001/process/notify/hsoa@fiberhome/push?title=aaa&userid=27181,16059 -->
+  		
+  		<forward pattern="/push" path="push/push.jsp"/>
+  		<forward pattern="/getNumber*" path="push/getNumber.jsp"/>
+  	</http-service>
+  </services>
+</maxml>

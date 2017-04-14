@@ -1,0 +1,209 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html orientation="port" id="new">
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false">Hello World</title>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<link rel="stylesheet" type="text/css" href="res:css/control.css" />
+		<script src="res:script/base.js"/>
+		<script src="res:script/app.js"/>
+		<script src="res:script/config.js"/>
+		<script src="res:script/hsoa.js"/>
+		<style type="text/css">
+		.label-right
+			{
+				width:65%;
+				margin:4;
+				color:#808080;
+				border-size:0;
+			}
+			.label-left{
+				width:35%;
+				margin:8 0 8 4;
+				
+			}
+		</style>
+		<script>
+		<![CDATA[
+		    //var page=1;
+			//var rowSize = 10; 
+			//var sumpage=0;
+			//var freshTag = 1;//搜索时freshTag=1，列表注入需clear()
+			//var tableString="";
+			//var eid="";
+			//var type=window.getParameter("type");
+			//var ListID="";
+		    var delID =window.getParameter("delID");
+		
+		function init(){
+			var url = "http://hsoa/edit.jsp";
+				var method = "post";
+			    var data = "ID="+delID;
+			    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+				var isShowProgress = true;
+			    var ajax = new Ajax(url,method,data,successeditFunction,null,requestHeader,isShowProgress);						
+			   	ajax.send();
+		}
+		
+		function successeditFunction(data)
+		{
+				var rspData = data.responseText.toJSON();
+				$("list").clear().provide(rspData.list[0]).show();
+				$("lb").selectedIndex =rspData.lb[0].djlb;
+			 
+		}
+		
+		
+		function submitt(){
+			
+			var xm=$("employeeInfoVO.value(C_EMPNAME)").value;
+			var sr=$("employeeInfoVO.value(C_BIRTHDAY)").value;
+			var gs=$("employeeInfoVO.value(C_ORGNAME)").value;
+			var xx=$("employeeInfoVO.value(C_SCHOOL)").value;
+			var zy=$("employeeInfoVO.value(C_ZY)").value;
+			var gw=$("employeeInfoVO.value(C_JOB)").value;
+			var lb=$("employeeInfoVO.value(C_DJLB)").value;
+			var sm=$("employeeInfoVO.value(C_REMARK)").value;
+			var dj=$("employeeInfoVO.value(C_DJR)").value;
+			
+			var url = "http://hsoa/editsubmit.jsp";
+			var method = "post";
+		    var data ="xm="+xm+"&sr="+sr+"&gs="+gs+"&xx="+xx+"&zy="+zy+"&gw="+gw+"&lb="+lb+"&sm="+sm+"&dj="+dj+"&ID="+delID;
+		    
+		    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+			var isShowProgress = true;
+		    var ajax = new Ajax(url,method,data,successFunction,formcallback,requestHeader,isShowProgress);						
+		   	ajax.send();
+		
+		}
+		function successFunction(data)
+		{
+				alert("编辑成功!",winClose);
+				
+
+		}
+		function formcallback(response){	                    	
+           alert("请求服务器失败，请检查网络");
+        }
+        
+        function winClose(){
+	      //var wn = Util.getWindowById("list");
+		  //wn.callFunction("refresh()");
+		  //window.close();
+		  window.open("res:page/list.uixml"); 
+		}
+        
+		function submit()
+		{
+			if($("employeeInfoVO.value(C_EMPNAME)").value=="")
+			{
+				alert("姓名未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_BIRTHDAY)").value=="")
+			{
+				alert("生日未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_ORGNAME)").value=="")
+			{
+				alert("公司未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_SCHOOL)").value=="")
+			{
+				alert("学校未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_ZY)").value=="")
+			{
+				alert("专业未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_JOB)").value=="")
+			{
+				alert("岗位未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_DJLB)").value=="")
+			{
+				alert("登记类别未填写！");
+				return;
+			}
+			if($("employeeInfoVO.value(C_REMARK)").value=="")
+			{
+				alert("详细说明未填写！");
+				return;
+			}
+	        /*//$("src").value="submit";
+	        var formsend=document.getElementById("formsend");
+	        formsend.method="post";
+	        //formsend.submit();
+	        $("formsend").submit();*/
+            submitt();
+		}
+    
+		function succ(data)
+		{
+			alert("新建成功!",window.close);
+		}
+		
+		
+		]]>
+		</script>
+	</head>
+	<header>
+		<titlebar title="编辑" iconhref="script:close" hidericon="false" id="titlebarid" ricon="res:image/icon/btn_submit.png" clickricon="res:image/icon/btn_submit.png" riconhref="submit()"/>
+	</header>
+	<body onload="init()">
+				<div id="list" style="display:none ">
+				<div class="container" >
+					<div class="label-left">姓名</div>
+					<input id="C20784995" class="label-right" name="employeeInfoVO.value(C_EMPNAME)"   type="text" value="${name}"  />
+					<hr/>
+					<div class="label-left">生日</div>
+					<object id="employeeInfoVO.value(C_BIRTHDAY)" class="label-right" name="employeeInfoVO.value(C_BIRTHDAY)"   type="date" value="${sr}"  />
+					<hr/>
+					<div class="label-left">公司</div>
+					<input id="C20784997" class="label-right" name="employeeInfoVO.value(C_ORGNAME)"   type="text" value="${gs}"  />
+					<hr/>
+					<div class="label-left">学校</div>
+					<input id="C20784999" class="label-right" name="employeeInfoVO.value(C_SCHOOL)"   type="text" value="${school}"  />
+					<hr/>
+					<div class="label-left">专业 </div>
+					<input id="C20785001" class="label-right" name="employeeInfoVO.value(C_ZY)"   type="text" value="${zy}"  />
+					<hr/>
+					<div class="label-left">岗位 </div>
+					<input id="C20785003" class="label-right" name="employeeInfoVO.value(C_JOB)"   type="text" value="${gw}"  />
+					<hr/>
+					<div class="label-left">登记类别</div>
+		 
+					<select id="lb" name="employeeInfoVO.value(C_DJLB)" class="label-right" >
+						<!--<option value="">${djlb}</option>-->
+						<option value="0">身体</option>
+						<option value="1">体检</option>
+						<option value="2">离职</option>
+						<option value="3">性格</option>
+						<option value="4">恒运</option>
+						<option value="5">其他</option>
+					</select>
+					
+					
+					<hr/>
+					<div class="label-left">详细说明</div>
+					<textarea class="label-right" rows="4" style="" id="C20785051" name="employeeInfoVO.value(C_REMARK)" >${xxsm}</textarea>
+					<hr/>
+					<div class="label-left">登记人</div>
+					<input id="C20785009" class="label-right" name="employeeInfoVO.value(C_DJR)"   type="text" value="${djr}"  />
+				</div>
+			 </div>
+			<!--<div id="param">
+				<input type="hidden" value="${value}" id="${name}" name="${name}"></input>
+			</div>-->
+	</body>
+	<!--<fixset>
+	  <fix style="bottom:18;right:28;display: none" id="fixid">
+	  	  	<img src="res:image/icon/addsub.png" href="addSub()" style="width:40;height:40"/>
+	  </fix>
+   </fixset>-->
+</html>

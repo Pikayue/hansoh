@@ -1,0 +1,145 @@
+﻿.containerbrowser{
+	border-radius:8;
+	margin:5 5 5 5;
+	border-size:1;
+	padding:5 5 5 5;
+	background-color: white;
+	height:70%
+}
+.zhenwen{
+	height:66%;
+}
+.container{
+	border-radius:8;
+	margin:5 5 5 5;
+	border-size:1;
+	padding:5 5 5 5;
+	background-color: white;
+}
+.yjdiv{
+	border-radius:8;
+	margin:5 5 5 5;
+	border-size:1;
+	padding:10 5 5 10;
+	background-color: white;
+}
+/*左右结构*/
+.yj-left{
+	width:30%;
+	margin:4 4;
+	
+}
+.yj-right{
+	width:70%;
+	margin:4;
+	color:#808080;
+}
+.spyj-title{
+	background-color:#C4E1FF;
+	padding: 4 8
+}
+
+/*左右结构*/
+.label-left{
+			width:30%;
+			margin:8 4;
+			color:#0679B2;
+		}
+		.label-right{
+			width:70%;
+			margin:4;
+				border-size:0;
+			color:black;
+			font-size:22;
+		}
+.label-input{
+	width:50%;
+	margin:4;
+}
+.label-input-btn{
+	width:20%;
+	padding:12 0;
+	margin:4 4 4 0;
+}
+/*右侧蓝色文字*/
+.font-instruction{
+	color:#274b7c;
+}
+
+/*九宫控件样式*/
+.grid{
+	cell-width:75dp;
+	width:90%;
+	align:center;
+}
+.tip{
+	tip-background-image:url(res:image/button/tip.png);
+	tip-background-color:transparent;
+	tip-border-size:0;
+	tip-overlay:none;
+	ricontextcolor:#ffffff;
+}
+
+/*表格*/
+.table{
+	background-color:transparent;
+	width:100%;
+	margin:8 10;
+}
+.table-title{
+	color:white;
+	background-color:#5570b3;
+}
+td{
+	height:40;
+	text-align:center;
+	text-valign:middle;
+}
+/*div仿表格*/
+.table-box{
+	border-size:1;
+	border-radius:8dp;
+	border-color:#5570b3;
+	width:100%;
+	margin:8 10;
+}
+.table-header{
+	background-image:url(res:image/table/tbl_header.png);
+	width:100%;
+	padding:12 0;
+	color:white;
+	text-align:center;
+	text-valign:middle;
+}
+.table-body{
+	width:100%;
+	border-radius:8dp;
+}
+.table-line{
+	padding:8 0;
+	border-bottom-size:1;
+	border-color:#5570b3;
+}
+
+/*右上角的已选人员*/
+.fix-people{
+	top:54;
+	right:10;
+	border-radius:4;
+	background-image:url(res:image/button/fix_btn.png);
+	padding:4;
+	color:#ffa200;
+	font-weight:blod;
+}
+
+/*下拉菜单样式*/
+.contextmenu-menu{
+	option-background-color:#5b78bb;
+	option-background-click-color:#3f5fa5;
+	option-background-current-color:#3f5fa5;
+	color:white;
+	click-color:white;
+	current-color:#ffffff;
+}
+
+ 

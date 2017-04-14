@@ -1,0 +1,218 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html orientation="port" id="list1">
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false">Hello World</title>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<link rel="stylesheet" type="text/css" href="res:css/control.css" />
+		<script src="res:script/exmobijs/base.js"/>
+		<script src="res:script/exmobijs/utility.js"/>
+		<script src="res:script/exmobijs/app.js"/>
+		<script src="res:script/exmobijs/db.js"/>
+		<script src="res:script/exmobijs/validate.js"/>
+		<script src="res:script/exmobijs/xpath.js"/>
+        <script src="res:script/exmobijs/common.js"/>
+         <style type="text/css">
+			.cancleStr{
+				width:50%;background-color:#cdcdcd;color:#ffffff;text-align:center;text-valign:middle;padding:8 0;border-size:1;border-radius:15;border-color:#ffffff;margin:0 20 0 20;background-click-color:#dbdbdb;
+			}
+			.delStr{
+				width:50%;background-color:#ff2a2a;color:#ffffff;text-align:center;text-valign:middle;padding:8 0;border-size:1;border-radius:15;border-color:#ffffff;margin:0 20 0 20;background-click-color:#fb8173;
+			}
+			.delDiv{
+				width:100%;padding:10 0 10 0;background-color:#f0f6ff;display:none;
+			}
+			.listDiv{
+				width:100%;padding:5 0;text-valign:middle;background-click-color:#eaeaea;background-color: white;padding: 5 5 5 5;margin:5 5 5 5;border-radius:8;
+			}
+			.time{
+				font-size:19dp;color:#9FACBC;margin:0 20 0 0;text-align:right;width:50%;
+			}
+			.sender{
+				font-size:17dp;color:#9FACBC;width:100%;
+			}
+			.title{
+				font-size:22dp;color:#000000;margin:0 10 0 0;
+			}
+				.label-right
+			{
+				width:65%;
+				margin:4;
+				color:#808080;
+				border-size:0;
+			}
+			.label-left{
+				width:35%;
+				margin:8 0 8 4;
+				
+			}
+		</style>
+		<script>
+		<![CDATA[
+			var page=1;
+			var rowSize = 10; 
+			var sumpage=0;
+			var freshTag = 1;//搜索时freshTag=1，列表注入需clear()
+			var tableString="";
+			var eid="";
+			var type=window.getParameter("type");
+			var ListID="";
+		
+			var n_open=false;
+	        var cx_open=false;
+			$("titlebarid").title="招聘记录";
+		
+			function init(){
+				var name=$("XM").value;	
+				var url = "http://hsoa/list01.jsp";
+				var method = "post";
+			    var data = "page="+page+"&name="+name;
+			    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+				var isShowProgress = true;
+			    var ajax = new Ajax(url,method,data,successFunction,null,requestHeader,isShowProgress);						
+			   	ajax.send();
+			}
+			function successFunction(data)
+			{
+				var rspData = data.responseText.toJSON();
+				var list=rspData.list;
+				$("btmdragDaiBan").setDisplay();
+				sumpage=rspData.sum;
+				tableString=rspData.tableString;
+				if(list.length==0)
+				{
+					$("list").hide();
+					$("nodata").show();
+					$("btmdragDaiBan").disabled = true;
+				}else
+				{
+					
+					$("nodata").hide();
+					if(freshTag==1){
+						window.scrollTo("top");
+						$("list").clear().provide(list).show();
+					}else{
+						$("list").provide(list).show();
+					}
+					var toast = new Toast();
+	 				toast.setText("第"+page+"/"+sumpage+"页");
+	 				toast.setDuration(300);
+	 				toast.show();
+					$("btmdragDaiBan").disabled = false;
+				}	
+			}
+			function formcallback(response){	                    	
+	           alert("请求服务器失败，请检查网络");
+	        }
+	    function ontimeout(){
+					alert("操作超时！");
+				}
+		function onscrollDaiBan(){
+					freshTag = 0;
+					setTimeout("downCallbackDaiBan()",10); 
+					 
+				}
+		function downCallbackDaiBan(){
+			if(page == sumpage){
+				$("btmdragDaiBan").setDisplay();
+				//alert("已经是最后一页了!");
+				var toast = new Toast();
+				toast.setText("已是最后一页");
+				toast.setDuration(2000);
+				toast.show();
+				return;
+			}else{
+				page = page + 1;
+			}
+			init();
+		}
+		function refresh(){
+			$("list").hide();
+			page =1;
+			init();
+		}
+		
+	 
+		function winClose(){
+	      //var wn = Util.getWindowById("list");
+		  //wn.callFunction("refresh()");
+		  //window.close(); 
+		  window.open("res:page/list01.uixml");
+		}  
+		
+		
+		
+		function search()
+		{   page=1;
+			freshTag = 1;
+			init();
+			/*$("XM").value="";*/
+			
+		}
+		
+		
+	   function openserach(){
+	      
+	 
+			    if(cx_open==false){
+               	 $("cxdiv").show();
+               	 cx_open=true;
+               }else{
+                 $("cxdiv").hide();
+               	 cx_open=false;
+               }
+		}
+		
+		]]>
+		</script>
+	</head>
+	<header>
+		<titlebar id="titlebarid" caption="" title="" iconhref="script:close" iconkeybind="back"  ricon="res:image/icon/cx1.png" clickricon="res:image/icon/cx2.png"  riconhref="openserach()" hidericon="false"></titlebar>
+	</header>
+	<body onload="init()">
+		<dragrefresh type="bottom" id="btmdragDaiBan" onscroll="onscrollDaiBan()" ontimeout="ontimeout()" timeout="20000"/>
+		
+		<div id="cxdiv"  style="display:none "  class="listDiv" >
+			<div class="label-left">姓名：</div>
+			<input id="XM" class="label-right" name="XM"   type="text" value="" />
+				<br size="3"/>
+				 <div  id="divcx" style="text-valign:middle;text-align:center;" href="">
+				 	<input id="cx"  name="cx"   type="button"  style="width:100 ;text-valign:middle;text-align:center;"   onclick="search()" value="查询" />
+
+				 </div>
+				 
+			</div>
+		
+		<div id="list" style="display:none ">
+			
+				
+				<!--<div class="listDiv" id="${id}" href="script:popmenu(oper)" >-->
+				<div style="width:15%;text-align: center;text-valign: middle "><img id="IMG_USE" src="res:image/login/user.png" href=""></img>
+			 </div>
+				<div style="width:77%;">
+			 
+			      	<div class="title" id="title" >${name}  </div>
+			        <div class="sender" id="sender1">出生日期：${birth}  公司: ${gs}      </div>
+			      	<br size="3"/>
+			      	<div class="sender" id="sender2">学校: ${school}    专业: ${zy}      岗位: ${gw}</div>
+			      	<br size="3"/>
+			      	<div class="sender" id="sender3">登记类别: ${djlb}    详细说明: ${xxsm}</div>
+                    <br size="3"/>
+			      	<div class="sender" id="sender4">登记人: ${djr}     操作时间: ${date}</div>
+			   	</div>
+			   	<div style="width:8%;text-valign:middle;text-align:center;"><img src="res:image/icon/arrow1.png" style="width:8" /></div>
+		   	
+    	       
+                 
+		   	
+		</div>
+		<div id="nodata"  style="height:100%;display:none;text-align:center;text-valign:middle">
+			<img id="" src="res:image/icon/nodata.png" href=""></img><br/>
+			<font>暂无数据</font>
+		</div>
+		
+
+
+		
+	</body>
+</html>

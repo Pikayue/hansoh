@@ -1,0 +1,214 @@
+<!-- ExMobi UIXML(XHTML)文件 -->
+<html orientation="port" id="detail">
+	<head>
+		<meta content="charset=utf-8"/>
+		<title show="false">Hello World</title>
+		<link rel="stylesheet" type="text/css" href="res:css/global.css" />
+		<link rel="stylesheet" type="text/css" href="res:css/control.css" />
+		<script src="res:script/base.js"/>
+		<script src="res:script/app.js"/>
+		<script src="res:script/config.js"/>
+		<script src="res:script/hsoa.js"/>
+		<style type="text/css">
+		
+		.font-color
+		{
+			color: #274b7c
+		}
+		</style>
+		<script>
+		<![CDATA[
+		var condition_open=false;
+		
+		function init(){
+			var year=$("year").value;
+			var yue=$("yue").value;		
+			var url = "http://hsoa/wages.jsp";
+			var method = "post";
+			var data = "year="+year+"&yue="+yue;
+		    var requestHeader = '{"Content-Type":"application/x-www-form-urlencoded","Accept-Language":"zh-cn"}';
+			var isShowProgress = true;
+		    var ajax = new Ajax(url,method,data,successFunction,formcallback,requestHeader,isShowProgress);						
+		   	ajax.send();
+		}
+		
+		function successFunction(data)
+		{
+			var rspData = data.responseText.toJSON();
+			$("showParam").clear().provide(rspData).show();
+			var nodata=rspData.nodata;
+			
+			if(nodata.length>1)
+			{
+					$("form1").hide();
+					$("nodata").show();
+			}
+			else
+			{$("form1").show();
+			$("nodata").hide();
+				
+			}
+		}
+		
+		function formcallback(response){
+		                    	
+	           alert("请求服务器失败，请检查网络");
+	        }
+	   
+	    function winClose()
+		{
+			//var wn = Util.getWindowById("workflowlist");
+			//wn.callFunction("refresh()");
+			window.close(); 
+		}
+		
+	   function openserach(){
+	      
+	 
+			    if(condition_open==false){
+               	 $("condition").show();
+               	 condition_open=true;
+               }else{
+                 $("condition").hide();
+               	 condition_open=false;
+               }
+		}
+		
+		function refresh(){
+			$("showParam").hide();
+			init();
+		}
+		
+		function search()
+		{   
+			var year=$("year").value;
+			var yue=$("yue").value;	
+			if (year=='0' ||yue =='0')
+			{
+				alert ("请正确选择年月");
+				$("form1").hide();
+				return false;
+			}
+			init();	
+			$("condition").hide();		
+		}	
+		]]>
+		</script>
+	</head>
+	<header>
+		<titlebar id="titlebarid" caption="" title="工资查询" iconhref="script:close" iconkeybind="back"  ricon="res:image/icon/cx1.png" clickricon="res:image/icon/cx2.png"  riconhref="openserach()" hidericon="false"></titlebar>
+	</header>
+	<body onload="init()" pagedrag="false">
+		<div id="condition"  style="display:none "  class="container" >
+			<div class="label-left">年<font style="color:red;font-weight:bold">！</font></div>
+			<select id="year" name="year" class="label-right" >
+					<option value="0">--</option>
+					<option value="2015">2015</option>
+					<option value="2016">2016</option>
+					<option value="2017">2017</option>
+					<option value="2018">2018</option>
+					<option value="2019">2019</option>
+					<option value="2020">2020</option>
+			</select>
+			<hr/>		
+			<div class="label-left">月<font style="color:red;font-weight:bold">！</font></div>
+			<select id="yue" name="yue" class="label-right" >
+					<option value="0">--</option>					
+					<option value="01">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>			
+			</select>
+			<hr/>
+			<br size="3"/>
+			 <div  id="divcx" style="text-valign:middle;text-align:center;" href="">
+			 	<input id="search"  name="search"   type="button"  style="width:100 ;text-valign:middle;text-align:center;"   onclick="search()" value="查询" />
+			 </div>
+		</div>
+			<form id="form1" action="" method="post" success="succ" >
+				<div  style="display: none" id="showParam">
+					<div class="container" >
+						<div  style="text-align:center;margin:10 5 5 5;">
+							<font style="font-weight:bold;font-size: 22" >${title} 工资单</font>
+						</div>
+						<hr />
+						<font class="label-left" >基本工资</font>
+						<div class="label-right" style="text-align:right">${basic}</div>
+						<hr />
+				
+						<font class="label-left" >职务工资</font>
+						<div class="label-right" style="text-align:right">${job}</div>
+						<hr />
+				
+						<font class="label-left" >加班费</font>
+						<div class="label-right" style="text-align:right">${overtime}</div>
+						<hr />
+				
+						<font class="label-left" >绩效工资</font>
+						<div class="label-right" style="text-align:right">${performance}</div>
+						<hr />
+				
+						<font class="label-left" >司龄工资</font>
+						<div class="label-right" style="text-align:right">${ourage}</div>
+						<hr />
+				
+						<font class="label-left" >夜班补贴</font>
+						<div class="label-right" style="text-align:right">${night}</div>
+						<hr />
+
+						<font class="label-left" >岗位补贴</font>
+						<div class="label-right" style="text-align:right">${station}</div>
+						<hr />
+				
+						<font class="label-left" >实习补贴</font>
+						<div class="label-right" style="text-align:right">${practice}</div>
+						<hr />
+				
+						<font class="label-left" >补贴补工资</font>
+						<div class="label-right" style="text-align:right">${allowance}</div>
+						<hr />
+				
+						<font class="label-left" >其他奖</font>
+						<div class="label-right" style="text-align:right">${other}</div>
+						<hr />
+				
+						<font class="label-left" >病事假</font>
+						<div class="label-right" style="text-align:right">${leave}</div>
+						<hr />
+				
+						<font class="label-left" >应发合计</font>
+						<div class="label-right" style="text-align:right">${yfsum}</div>
+						<hr />
+				
+						<font class="label-left" >其他扣款</font>
+						<div class="label-right" style="text-align:right">${qtcut}</div>
+						<hr />
+				
+						<font class="label-left" >扣款合计</font>
+						<div class="label-right" style="text-align:right">${cutsum}</div>
+						<hr />
+				
+						<font class="label-left" >实发金额</font>
+						<div class="label-right" style="text-align:right">${sfsum}</div>
+						<hr />	
+					</div>	
+				</div>					
+			</form>
+		<div id="nodata"  style="height:100%;display:none;text-align:center;text-valign:middle">
+			<img id="" src="res:image/icon/nodata.png" href=""></img><br/>
+			<font>暂无数据</font>
+		</div>
+
+	</body>
+	<footer>
+	    <div style="width:100%;padding:0 0 2 0;background-color:white;text-align:center;border-top-size:1;border-color:#d8d8d8; " id="footer"></div>
+	</footer>
+</html>
